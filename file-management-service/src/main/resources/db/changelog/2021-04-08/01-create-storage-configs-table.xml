@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="Volodymyr Kozlov" id="1642009957-1">
+        <createTable tableName="storage_configs">
+            <column name="name" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_storage_configs"/>
+            </column>
+
+            <column name="repository" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_storage_configs"/>
+            </column>
+
+            <column name="is_versioning_enabled" type="${tinyint.type}">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_by" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="record_status" type="varchar(1)" defaultValue="A">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,1 +1,13 @@
+server:
+  servlet:
+    context-path: /file-management-service
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:5432/postgres?currentSchema=file_management
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
 

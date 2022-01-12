@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+file-management-service/src/main/resources/application-local.yml
 
 ### STS ###
 .apt_generated

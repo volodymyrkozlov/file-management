@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="Vladimir Kozlov" id="1642009957-4">
+        <createTable tableName="file_operations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="op_file_guid" type="varchar(64)">
+                <constraints nullable="false"
+                             foreignKeyName="rgQqJqCtxi"
+                             references="files_meta(guid)"/>
+            </column>
+
+            <column name="operation" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="file_guid" type="varchar(64)">
+                <constraints foreignKeyName="ENaWliBTmA"
+                             references="files_meta(guid)"/>
+            </column>
+
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_by" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="record_status" type="varchar(1)" defaultValue="A">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
