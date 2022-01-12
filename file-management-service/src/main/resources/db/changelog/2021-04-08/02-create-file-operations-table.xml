@@ -5,14 +5,25 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet author="Volodymyr Kozlov" id="1642009957-1">
-        <createTable tableName="storage_configs">
-            <column name="name" type="varchar(32)">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_storage_configs"/>
+    <changeSet author="Vladimir Kozlov" id="1642009957-2">
+        <createTable tableName="file_operations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
             </column>
 
-            <column name="repository" type="varchar(255)">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_storage_configs"/>
+            <column name="op_file_guid" type="varchar(64)">
+                <constraints nullable="false"
+                             foreignKeyName="rgQqJqCtxi"
+                             references="files_meta(guid)"/>
+            </column>
+
+            <column name="operation" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="file_guid" type="varchar(64)">
+                <constraints foreignKeyName="ENaWliBTmA"
+                             references="files_meta(guid)"/>
             </column>
 
             <column name="created_by" type="varchar(255)">

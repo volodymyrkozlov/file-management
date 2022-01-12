@@ -1,7 +1,6 @@
 package com.volodymyrkozlov.filemanagement.app.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,11 +11,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -48,13 +44,6 @@ public class FileMetaEntity extends AuditedEntity {
 
     @Column(nullable = false)
     private String path;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storage_name")
-    @JoinColumn(name = "storage_repository")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private StorageConfigEntity storageConfig;
 
     @Override
     public boolean equals(Object o) {

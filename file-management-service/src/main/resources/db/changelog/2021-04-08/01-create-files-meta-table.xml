@@ -5,25 +5,37 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet author="Volodymyr Kozlov" id="1642009957-2">
-        <createTable tableName="storage_config_options">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true"/>
+    <changeSet author="Volodymyr Kozlov" id="1642009957-1">
+        <createTable tableName="files_meta">
+            <column name="guid" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="file_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="directory" type="varchar(255)">
+                <constraints nullable="false"/>
             </column>
 
             <column name="storage_name" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="storage_repository" type="varchar(255)">
+            <column name="storage_bucket" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="key" type="varchar(64)">
+            <column name="content_type" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="value" type="varchar(1024)">
+            <column name="content_length" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="path" type="varchar(2048)">
                 <constraints nullable="false"/>
             </column>
 
@@ -48,16 +60,15 @@
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="storage_config_options"
-                                 baseColumnNames="storage_name, storage_repository"
-                                 constraintName="osyburonyz"
-                                 referencedTableName="storage_configs"
-                                 referencedColumnNames="name, repository"/>
-
-        <createIndex tableName="storage_config_options" indexName="zsyburonyz">
+        <createIndex tableName="files_meta" indexName="kowObRVJBV">
+            <column name="file_name"/>
+            <column name="directory"/>
+            <column name="storage_bucket"/>
             <column name="storage_name"/>
-            <column name="storage_repository"/>
-            <column name="key"/>
+        </createIndex>
+
+        <createIndex tableName="files_meta" indexName="kowObRVJBS">
+            <column name="path"/>
         </createIndex>
     </changeSet>
 
