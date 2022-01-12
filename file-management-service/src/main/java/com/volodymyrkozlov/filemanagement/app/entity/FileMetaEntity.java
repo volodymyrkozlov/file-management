@@ -40,8 +40,6 @@ public class FileMetaEntity extends AuditedEntity {
     @Column(nullable = false)
     private String directory;
 
-    private String version;
-
     @Column(nullable = false)
     private String contentType;
 
@@ -60,8 +58,12 @@ public class FileMetaEntity extends AuditedEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         FileMetaEntity that = (FileMetaEntity) o;
         return guid != null && Objects.equals(guid, that.guid);
     }

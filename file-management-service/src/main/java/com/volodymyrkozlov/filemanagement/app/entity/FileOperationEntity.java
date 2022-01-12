@@ -51,8 +51,12 @@ public class FileOperationEntity extends AuditedEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         FileOperationEntity that = (FileOperationEntity) o;
         return id != null && Objects.equals(id, that.id);
     }

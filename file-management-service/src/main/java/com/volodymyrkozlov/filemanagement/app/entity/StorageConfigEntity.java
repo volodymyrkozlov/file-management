@@ -30,15 +30,18 @@ public class StorageConfigEntity extends AuditedEntity {
     @EmbeddedId
     private StorageConfigId id;
 
-    private Boolean isVersioningEnabled;
-
     @OneToMany(mappedBy = "storageConfig", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<StorageConfigOptionEntity> storageConfigOptions;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+
         StorageConfigEntity that = (StorageConfigEntity) o;
         return id != null && Objects.equals(id, that.id);
     }

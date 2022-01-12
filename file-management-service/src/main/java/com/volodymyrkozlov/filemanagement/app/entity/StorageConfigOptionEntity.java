@@ -44,8 +44,12 @@ public class StorageConfigOptionEntity extends AuditedEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         StorageConfigOptionEntity that = (StorageConfigOptionEntity) o;
         return id != null && Objects.equals(id, that.id);
     }

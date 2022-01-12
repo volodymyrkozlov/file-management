@@ -15,10 +15,6 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_storage_configs"/>
             </column>
 
-            <column name="is_versioning_enabled" type="${tinyint.type}">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
