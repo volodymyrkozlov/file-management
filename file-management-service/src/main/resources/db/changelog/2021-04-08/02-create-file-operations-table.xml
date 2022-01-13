@@ -11,19 +11,13 @@
                 <constraints primaryKey="true"/>
             </column>
 
-            <column name="op_file_guid" type="varchar(64)">
-                <constraints nullable="false"
-                             foreignKeyName="rgQqJqCtxi"
+            <column name="file_guid" type="varchar(64)">
+                <constraints foreignKeyName="ENaWliBTmA"
                              references="files_meta(guid)"/>
             </column>
 
             <column name="operation" type="varchar(32)">
                 <constraints nullable="false"/>
-            </column>
-
-            <column name="file_guid" type="varchar(64)">
-                <constraints foreignKeyName="ENaWliBTmA"
-                             references="files_meta(guid)"/>
             </column>
 
             <column name="created_by" type="varchar(255)">

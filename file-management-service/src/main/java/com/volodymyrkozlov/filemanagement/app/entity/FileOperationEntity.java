@@ -35,19 +35,14 @@ public class FileOperationEntity extends AuditedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "operation", nullable = false)
-    private FileOperation fileOperation;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "op_file_guid", nullable = false)
-    @ToString.Exclude
-    private FileMetaEntity operationFile;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "file_guid")
     @ToString.Exclude
     private FileMetaEntity file;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "operation", nullable = false)
+    private FileOperation fileOperation;
 
     @Override
     public boolean equals(Object o) {

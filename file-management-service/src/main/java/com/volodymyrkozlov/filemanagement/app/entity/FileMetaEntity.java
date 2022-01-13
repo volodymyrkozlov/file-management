@@ -1,5 +1,6 @@
 package com.volodymyrkozlov.filemanagement.app.entity;
 
+import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -35,6 +38,13 @@ public class FileMetaEntity extends AuditedEntity {
 
     @Column(nullable = false)
     private String directory;
+
+    @Column(nullable = false)
+    private String bucket;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StorageType storage;
 
     @Column(nullable = false)
     private String contentType;

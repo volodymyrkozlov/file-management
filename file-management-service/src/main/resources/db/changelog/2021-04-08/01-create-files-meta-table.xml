@@ -19,11 +19,11 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="storage_name" type="varchar(32)">
+            <column name="storage" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="storage_bucket" type="varchar(255)">
+            <column name="bucket" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
@@ -63,8 +63,8 @@
         <createIndex tableName="files_meta" indexName="kowObRVJBV">
             <column name="file_name"/>
             <column name="directory"/>
-            <column name="storage_bucket"/>
-            <column name="storage_name"/>
+            <column name="bucket"/>
+            <column name="storage"/>
         </createIndex>
 
         <createIndex tableName="files_meta" indexName="kowObRVJBS">
