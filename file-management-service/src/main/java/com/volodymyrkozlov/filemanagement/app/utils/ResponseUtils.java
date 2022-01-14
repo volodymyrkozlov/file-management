@@ -27,7 +27,7 @@ public class ResponseUtils {
         headers.add("directory", fileDto.directory());
         headers.add("bucket", fileDto.bucket());
         headers.add("storage", fileDto.storage().toString());
-        headers.add("fullPath", fileDto.path());
+        headers.add("path", fileDto.path());
 
         return ResponseEntity.ok()
             .headers(headers)
