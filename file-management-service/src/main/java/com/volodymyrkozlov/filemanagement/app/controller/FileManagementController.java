@@ -2,7 +2,7 @@ package com.volodymyrkozlov.filemanagement.app.controller;
 
 import com.volodymyrkozlov.filemanagement.app.connector.StorageConnectorsProcessor;
 import com.volodymyrkozlov.filemanagement.app.dto.FileMetaDto;
-import com.volodymyrkozlov.filemanagement.app.dto.request.UploadFileRequestDto;
+import com.volodymyrkozlov.filemanagement.app.dto.web.request.UploadFileRequestDto;
 import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import com.volodymyrkozlov.filemanagement.app.utils.ResponseUtils;
 import lombok.RequiredArgsConstructor;

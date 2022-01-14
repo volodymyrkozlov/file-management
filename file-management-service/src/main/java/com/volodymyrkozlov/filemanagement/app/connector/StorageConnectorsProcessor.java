@@ -2,7 +2,7 @@ package com.volodymyrkozlov.filemanagement.app.connector;
 
 import com.volodymyrkozlov.filemanagement.app.dto.FileDto;
 import com.volodymyrkozlov.filemanagement.app.dto.FileMetaDto;
-import com.volodymyrkozlov.filemanagement.app.dto.request.UploadFileRequestDto;
+import com.volodymyrkozlov.filemanagement.app.dto.web.request.UploadFileRequestDto;
 import com.volodymyrkozlov.filemanagement.app.entity.FileMetaEntity;
 import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import com.volodymyrkozlov.filemanagement.app.exception.InvalidArgumentException;
