@@ -5,6 +5,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.volodymyrkozlov.filemanagement.app.entity.EntityRecordStatus;
 import com.volodymyrkozlov.filemanagement.app.entity.QFileMetaEntity;
+import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 
 import java.util.Optional;
 
@@ -33,6 +34,13 @@ public final class QFileEntityFilter {
     public QFileEntityFilter path(final String path) {
         Optional.ofNullable(path)
             .ifPresent(p -> this.pred = this.pred.and(entity().path.eq(p)));
+
+        return this;
+    }
+
+    public QFileEntityFilter storage(final StorageType storage) {
+        Optional.ofNullable(storage)
+            .ifPresent(s -> this.pred = this.pred.and(entity().storage.eq(s)));
 
         return this;
     }

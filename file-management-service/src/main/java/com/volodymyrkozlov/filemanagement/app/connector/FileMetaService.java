@@ -1,4 +1,4 @@
-package com.volodymyrkozlov.filemanagement.app.service;
+package com.volodymyrkozlov.filemanagement.app.connector;
 
 
 import com.volodymyrkozlov.filemanagement.app.entity.FileMetaEntity;
@@ -11,22 +11,18 @@ import com.volodymyrkozlov.filemanagement.app.repository.filter.QFileEntityFilte
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Service
-@Validated
 @RequiredArgsConstructor
-public class FileMetaService {
+class FileMetaService {
     private final FileMetaRepository fileMetaRepository;
     private final FileOperationRepository fileOperationRepository;
 
     @Transactional(readOnly = true)
-    public FileMetaEntity findByGuid(@NotBlank final String guid) {
+    FileMetaEntity findByGuid(final String guid) {
         final var predicate = QFileEntityFilter.builder()
             .guid(guid)
             .toPredicate();
@@ -36,31 +32,32 @@ public class FileMetaService {
     }
 
     @Transactional(readOnly = true)
-    public FileMetaEntity findByFullPath(@NotBlank final String path) {
-        return this.findOptionalFileMeta(path)
+    FileMetaEntity findByFullPath(final String path,
+                                  final StorageType storage) {
+        return this.findOptionalFileMeta(path, storage)
             .orElseThrow(() -> new EntityNotFoundException(String.format("File:[%s] is not found", path)));
     }
 
     @Transactional
-    public FileMetaEntity save(@NotBlank final String fileName,
-                               @NotBlank final String directory,
-                               @NotBlank final String bucket,
-                               @NotBlank final String path,
-                               @NotNull final StorageType storageType,
-                               @NotNull final Long contentLength,
-                               @NotBlank final String contentType) {
+    FileMetaEntity save(final String fileName,
+                        final String directory,
+                        final String bucket,
+                        final String path,
+                        final StorageType storage,
+                        final Long contentLength,
+                        final String contentType) {
 
-        return this.findOptionalFileMeta(path)
+        return this.findOptionalFileMeta(path, storage)
             .map(existingFileMeta -> this.updateFileMeta(existingFileMeta, contentType, contentLength))
             .orElseGet(() -> this.saveInitialFileMeta(
-                fileName, directory, bucket, storageType, contentLength, contentType, path)
+                fileName, directory, bucket, storage, contentLength, contentType, path)
             );
     }
 
     private FileMetaEntity saveInitialFileMeta(final String fileName,
                                                final String directory,
                                                final String bucket,
-                                               final StorageType storageType,
+                                               final StorageType storage,
                                                final Long contentLength,
                                                final String contentType,
                                                final String path) {
@@ -68,7 +65,7 @@ public class FileMetaService {
             .fileName(fileName)
             .directory(directory)
             .bucket(bucket)
-            .storage(storageType)
+            .storage(storage)
             .contentType(contentType)
             .contentLength(contentLength)
             .path(path)
@@ -102,9 +99,11 @@ public class FileMetaService {
         fileOperationRepository.save(fileOperationEntity);
     }
 
-    private Optional<FileMetaEntity> findOptionalFileMeta(final String path) {
+    private Optional<FileMetaEntity> findOptionalFileMeta(final String path,
+                                                          final StorageType storage) {
         final var predicate = QFileEntityFilter.builder()
             .path(path)
+            .storage(storage)
             .toPredicate();
 
         return fileMetaRepository.findOne(predicate);

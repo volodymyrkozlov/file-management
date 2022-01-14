@@ -69,6 +69,7 @@
 
         <createIndex tableName="files_meta" indexName="kowObRVJBS">
             <column name="path"/>
+            <column name="storage"/>
         </createIndex>
     </changeSet>
 
