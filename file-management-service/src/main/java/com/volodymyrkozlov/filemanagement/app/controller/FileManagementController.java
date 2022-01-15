@@ -4,6 +4,7 @@ import com.volodymyrkozlov.filemanagement.app.connector.StorageConnectorsProcess
 import com.volodymyrkozlov.filemanagement.app.dto.FileMetaDto;
 import com.volodymyrkozlov.filemanagement.app.dto.web.request.UploadFileRequestDto;
 import com.volodymyrkozlov.filemanagement.app.utils.ResponseUtils;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class FileManagementController {
     public static final String ROOT = "/api/v1/files";
     private final StorageConnectorsProcessor storageConnectorsProcessor;
 
+    @Operation(summary = "Find file by guid")
     @GetMapping("/{guid}")
     public ResponseEntity<Resource> find(@PathVariable("guid") final String guid) {
         final var fileDto = storageConnectorsProcessor.getFileByGuid(guid);
@@ -35,6 +37,7 @@ public class FileManagementController {
         return ResponseUtils.fetchResponse(fileDto);
     }
 
+    @Operation(summary = "Upload multipart file")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/multipart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public FileMetaDto upload(@NotNull @Valid final UploadFileRequestDto request) {
