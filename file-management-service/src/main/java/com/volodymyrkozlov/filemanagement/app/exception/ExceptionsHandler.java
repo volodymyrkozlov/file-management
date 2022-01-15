@@ -94,7 +94,7 @@ public class ExceptionsHandler {
         return new ResponseErrorStatus(httpStatus.value(), httpStatus.getReasonPhrase());
     }
 
-    public static List<ResponseErrorDetails> toResponseErrorDetails(final BindingResult bindingResult) {
+    private static List<ResponseErrorDetails> toResponseErrorDetails(final BindingResult bindingResult) {
         final var errors = new ArrayList<ResponseErrorDetails>();
         bindingResult.getFieldErrors()
             .forEach(e -> errors.add(new ResponseErrorDetails(e.getDefaultMessage(), e.getField())));

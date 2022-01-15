@@ -45,14 +45,6 @@ public class StorageConnectorsProcessor {
         return this.fetchFile(fileMeta);
     }
 
-    public FileDto getFileByPath(@NotBlank final String path,
-                                 @NotBlank final String bucket,
-                                 @NotNull final StorageType storage) {
-        final var fileMeta = fileMetaService.findByFullPath(fullPath(bucket, path), storage);
-
-        return this.fetchFile(fileMeta);
-    }
-
     public FileMetaDto uploadFile(@NotNull @Valid final UploadFileRequestDto request) {
         final var multipartFile = request.file();
         final var fileName = multipartFile.getResource().getFilename();
@@ -93,11 +85,6 @@ public class StorageConnectorsProcessor {
         } catch (final IOException e) {
             throw new InvalidArgumentException(e.getMessage());
         }
-    }
-
-    private static String fullPath(final String bucket,
-                                   final String path) {
-        return String.format("/%s%s", bucket, path);
     }
 
     private static String fileFullPath(final String bucket,

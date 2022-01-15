@@ -10,9 +10,6 @@ spring:
       ddl-auto: none
   liquibase:
     change-log: db/changelog/changelog-master.xml
-  mvc:
-    pathmatch:
-      matching-strategy: path_pattern_parser
   servlet:
     multipart:
       max-file-size: 50MB

@@ -1,4 +1,10 @@
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: path_pattern_parser
+file-management:
+  storages:
+    LOCAL:
+      - bucket: ${user.home}/demo-bucket
+    S3:
+      - bucket: demo-bucket-file-management
+        options:
+          ACCESS_KEY_ID: test
+          ACCESS_KEY_SECRET: test
+          BUCKET_REGION: test

@@ -31,13 +31,6 @@ class FileMetaService {
             .orElseThrow(() -> new EntityNotFoundException(String.format("File with guid:[%s] is not found", guid)));
     }
 
-    @Transactional(readOnly = true)
-    FileMetaEntity findByFullPath(final String path,
-                                  final StorageType storage) {
-        return this.findOptionalFileMeta(path, storage)
-            .orElseThrow(() -> new EntityNotFoundException(String.format("File:[%s] is not found", path)));
-    }
-
     @Transactional
     FileMetaEntity save(final String fileName,
                         final String directory,

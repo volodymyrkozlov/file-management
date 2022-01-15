@@ -3,7 +3,6 @@ package com.volodymyrkozlov.filemanagement.app.controller;
 import com.volodymyrkozlov.filemanagement.app.connector.StorageConnectorsProcessor;
 import com.volodymyrkozlov.filemanagement.app.dto.FileMetaDto;
 import com.volodymyrkozlov.filemanagement.app.dto.web.request.UploadFileRequestDto;
-import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import com.volodymyrkozlov.filemanagement.app.utils.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -32,15 +31,6 @@ public class FileManagementController {
     @GetMapping("/{guid}")
     public ResponseEntity<Resource> find(@PathVariable("guid") final String guid) {
         final var fileDto = storageConnectorsProcessor.getFileByGuid(guid);
-
-        return ResponseUtils.fetchResponse(fileDto);
-    }
-
-    @GetMapping("/{storage}/{bucket}/{*bucket-relative-path}")
-    public ResponseEntity<Resource> find(@PathVariable("storage") final StorageType storage,
-                                         @PathVariable("bucket") final String bucket,
-                                         @PathVariable("bucket-relative-path") final String path) {
-        final var fileDto = storageConnectorsProcessor.getFileByPath(path, bucket, storage);
 
         return ResponseUtils.fetchResponse(fileDto);
     }
