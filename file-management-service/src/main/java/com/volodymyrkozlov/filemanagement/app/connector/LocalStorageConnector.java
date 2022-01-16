@@ -4,6 +4,7 @@ import com.volodymyrkozlov.filemanagement.app.entity.FileMetaEntity;
 import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import com.volodymyrkozlov.filemanagement.app.exception.InvalidArgumentException;
 import org.apache.commons.io.FileUtils;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Profile("local-storage")
 @Component
 class LocalStorageConnector implements StorageConnector {
 

@@ -5,6 +5,7 @@ import com.volodymyrkozlov.filemanagement.app.enums.StorageConfigOption;
 import com.volodymyrkozlov.filemanagement.app.enums.StorageType;
 import com.volodymyrkozlov.filemanagement.app.exception.InvalidArgumentException;
 import com.volodymyrkozlov.filemanagement.app.property.FileManagementProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -20,6 +21,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Profile("s3-storage")
 @Component
 public class S3StorageConnector implements StorageConnector {
     private final Map<String, S3Client> regionS3ClientMap;
@@ -58,8 +60,7 @@ public class S3StorageConnector implements StorageConnector {
         final var fileName = fileMeta.getFileName();
         try {
             final var bucket = fileMeta.getBucket();
-            final var bucketRegion = bucketRegionsMap.get(bucket);
-            return regionS3ClientMap.get(bucketRegion).getObject(GetObjectRequest.builder()
+            return regionS3ClientMap.get(this.fetchRegion(bucket)).getObject(GetObjectRequest.builder()
                 .bucket(bucket)
                 .key(fetchFileKey(fileMeta.getDirectory(), fileName))
                 .build());
@@ -77,8 +78,7 @@ public class S3StorageConnector implements StorageConnector {
                                   final Long contentLength,
                                   final String contentType) {
         try {
-            final var bucketRegion = bucketRegionsMap.get(bucket);
-            regionS3ClientMap.get(bucketRegion).putObject(PutObjectRequest.builder()
+            regionS3ClientMap.get(this.fetchRegion(bucket)).putObject(PutObjectRequest.builder()
                 .bucket(bucket)
                 .key(fetchFileKey(directory, fileName))
                 .contentLength(contentLength)
@@ -89,6 +89,14 @@ public class S3StorageConnector implements StorageConnector {
         } catch (final IOException | S3Exception e) {
             throw new InvalidArgumentException(e);
         }
+    }
+
+    private String fetchRegion(final String bucket) {
+        if (this.bucketRegionsMap.containsKey(bucket)) {
+            return this.bucketRegionsMap.get(bucket);
+        }
+
+        throw new InvalidArgumentException(String.format("Bucket:[%s] is not registered", bucket));
     }
 
     private static String fetchFileKey(final String targetDirectory,
