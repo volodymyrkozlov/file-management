@@ -3,7 +3,7 @@ server:
     context-path: /file-management-service
 spring:
   profiles:
-    active: local-storage
+    active: local-storage, s3-storage
   datasource:
     url: jdbc:postgresql://${DB_HOST}:5432/postgres?currentSchema=file_management
     driver-class-name: org.postgresql.Driver
