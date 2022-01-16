@@ -1,7 +1,7 @@
 file-management:
   storages:
     LOCAL:
-      - bucket: ${user.home}/demo-bucket
+      - bucket: temp-test-files-bucket
     S3:
       - bucket: demo-bucket-file-management
         options:

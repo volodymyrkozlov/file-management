@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-@Profile("local-storage")
+@Profile({"local-storage", "test"})
 @Component
 class LocalStorageConnector implements StorageConnector {
 
@@ -26,7 +26,7 @@ class LocalStorageConnector implements StorageConnector {
     public InputStream getFileRequest(final FileMetaEntity fileMeta) {
         try {
             return new FileInputStream(fileMeta.getPath());
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             throw new InvalidArgumentException(e);
         }
     }

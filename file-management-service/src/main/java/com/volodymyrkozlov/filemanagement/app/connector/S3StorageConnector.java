@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Profile("s3-storage")
+@Profile({"s3-storage", "test"})
 @Component
 public class S3StorageConnector implements StorageConnector {
     private final Map<String, S3Client> regionS3ClientMap;

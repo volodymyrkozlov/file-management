@@ -66,8 +66,8 @@ public class FileManagementControllerTest extends AbstractMvcTestIT {
                 .param("storage", storage.toString())
                 .param("bucket", bucket)
                 .param("directory", directory))
-            .andExpect(status().isCreated())
             .andDo(print())
+            .andExpect(status().isCreated())
             .andReturn(), FileMetaDto.class);
 
         //then
