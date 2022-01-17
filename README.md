@@ -4,7 +4,13 @@
 
 This repository contains a spring boot based demo project for managing files in various file storages.
 
-The application provides a unified interface to manage files in the host storage and AWS S3. Storage connectors can be easily extended, so the app might communicate with other storages as well.
+The application provides a unified interface to manage files in the host storage and AWS S3. Storage connectors can be easily extended, so the app might communicate with other storages as well. <br>
+
+**Component diagram**
+![Component diagram](/assets/component-diagram.png)
+
+**Entity relationship diagram**
+![ERD](/assets/ERD.png)
 
 The project also shows how to create a multi-module Maven project, manage dependencies and plugins, create REST controllers, create business logic layers using SOLID principles and behaviour patterns, connect to AWS S3 and system local file storages and manage files there, connect to a database, manage database entities, create liquibase scripts, do bean validation and proper error management, create a docker file, create docker compose file, create integration tests using test containers, create OpenAPI docs.
 
